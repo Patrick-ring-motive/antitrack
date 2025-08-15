@@ -111,7 +111,7 @@
   })();
   const atrs = [HTMLAnchorElement, HTMLImageElement, HTMLScriptElement];
   for (const atr of atrs) {
-    Object.defineProperty(atr, 'attributionSrc', { get() { }, set(x) { console.warn('blocking attr', x); } });
+    Object.defineProperty(atr.prototype, 'attributionSrc', { get() { }, set(x) { console.warn('blocking attr', x); } });
   }
   Object.defineProperty(self, 'SENTRY_RELEASE', { get() { }, set(x) { console.warn('blocking SENTRY_RELEASE', x); } });
 })();
