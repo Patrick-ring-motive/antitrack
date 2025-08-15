@@ -10,14 +10,11 @@
 // ==/UserScript==
 
 (() => {
-
   const runs = ['replit', 'stripe', 'sentry', 'googleanalytics'];
-
   if (!runs.some(x => location.href.includes(x))) {
     return;
   }
   Object.keys(localStorage).filter(x => x.startsWith('dataLoss')).forEach(x => localStorage.removeItem(x));
-
   const blocks = ['https://sp.replit.com', '__reachability', 'stripe.com', 'logs.browser', 'sentry.io', 'analytics.google.com', 'google-analytics', 'sorryapp.com', 'events.launchdarkly.com', 'doubleclick.net'];
   (() => {
     const _fetch = globalThis.fetch
@@ -32,15 +29,12 @@
       return _fetch.apply(this, args);
     }, _fetch);
   })();
-
-
   (() => {
     const $Map = self?.WeakMap ?? Map;
     const _openArgs = new $Map();
     const xhrs = [XMLHttpRequest, XMLHttpRequestUpload, XMLHttpRequestEventTarget];
     for (const xhr of xhrs) {
       (() => {
-
         const _open = xhr.prototype.open;
         if (!_open) return;
         xhr.prototype.open = Object.setPrototypeOf(function open(...args) {
@@ -48,7 +42,6 @@
           return _open.apply(this, args);
         }, _open);
       })();
-
       (() => {
         const _send = xhr.prototype.send;
         if (!_send) return;
@@ -66,7 +59,6 @@
       })();
     }
   })();
-
   const scripts = [...document.getElementsByTagName('script'), ...document.getElementsByTagName('iframe'), ...document.getElementsByTagName('frame')];
   for (const script of scripts) {
     for (const block of blocks) {
@@ -76,7 +68,6 @@
       }
     }
   }
-
   (() => {
     const _appendChild = HTMLElement.prototype.appendChild;
     HTMLElement.prototype.appendChild = Object.setPrototypeOf(function appendChild(child) {
@@ -89,7 +80,6 @@
       return _appendChild.call(this, child);
     }, _appendChild);
   })();
-
   (() => {
     const _sendBeacon = Navigator.prototype.sendBeacon;
     Navigator.prototype.sendBeacon = Object.setPrototypeOf(function sendBeacon(...args) {
@@ -103,7 +93,6 @@
       return _sendBeacon.apply(this, args);
     }, _sendBeacon);
   })();
-
   (() => {
     const _Worker = self.Worker;
     const $Worker = class Worker extends _Worker {
