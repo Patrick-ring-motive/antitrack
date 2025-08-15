@@ -100,7 +100,7 @@
         const url = JSON.stringify(args);
         for (const block of blocks) {
           if (url.includes(block)) {
-            super(`data:text/javascript,console.warn('worker blocked');`;
+            super(`data:text/javascript,console.warn('worker blocked');`);
             console.warn('blocking worker', ...args);
             return;
           }
