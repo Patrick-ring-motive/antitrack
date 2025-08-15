@@ -17,8 +17,8 @@
   Object.keys(localStorage).filter(x => x.startsWith('dataLoss')).forEach(x => localStorage.removeItem(x));
   const blocks = ['https://sp.replit.com', '__reachability', 'stripe.com', 'logs.browser', 'sentry.io', 'analytics.google.com', 'google-analytics', 'sorryapp.com', 'events.launchdarkly.com', 'doubleclick.net'];
   (() => {
-    const _fetch = globalThis.fetch
-    globalThis.fetch = Object.setPrototypeOf(async function fetch(...args) {
+    const _fetch = self.fetch
+    self.fetch = Object.setPrototypeOf(async function fetch(...args) {
       const url = JSON.stringify(args.map(x => (String(x?.url ?? x))));
       for (const block of blocks) {
         if (url.includes(block)) {
