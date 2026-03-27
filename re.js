@@ -23,7 +23,7 @@
       for (const block of blocks) {
         if (url.includes(block)) {
           console.warn('blocking fetch', ...args);
-          return new Promise(() => { });
+          return new Promise(() => {});
         }
       }
       return _fetch.apply(this, args);
@@ -112,7 +112,17 @@
   })();
   const atrs = [HTMLAnchorElement, HTMLImageElement, HTMLScriptElement];
   for (const atr of atrs) {
-    Object.defineProperty(atr.prototype, 'attributionSrc', { get() { }, set(x) { console.warn('blocking attr', x); } });
+    Object.defineProperty(atr.prototype, 'attributionSrc', {
+      get() {},
+      set(x) {
+        console.warn('blocking attr', x);
+      }
+    });
   }
-  Object.defineProperty(self, 'SENTRY_RELEASE', { get() { }, set(x) { console.warn('blocking SENTRY_RELEASE', x); } });
+  Object.defineProperty(self, 'SENTRY_RELEASE', {
+    get() {},
+    set(x) {
+      console.warn('blocking SENTRY_RELEASE', x);
+    }
+  });
 })();
